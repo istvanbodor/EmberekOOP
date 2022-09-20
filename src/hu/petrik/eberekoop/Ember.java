@@ -1,6 +1,8 @@
 package hu.petrik.eberekoop;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 
 public class Ember {
@@ -35,9 +37,40 @@ public class Ember {
     }
 public int getEletkor()
 {
+ /*   DateTimeFormatter formatter;
+    String date;
+    if (getSzuletesiHonap()>9) {
+
+        formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
+        date = getSzuletesiEv()+"-"+getSzuletesiHonap()+"-"+getSzuletesiNap();
+    }
+    else {
+        formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
+        date = getSzuletesiEv()+"-"+getSzuletesiHonap()+"-"+getSzuletesiNap();
+    }
+
+    LocalDate localDate = LocalDate.parse(date, formatter);
+
 
     LocalDate maiDatum = LocalDate.now();
-    return maiDatum.getYear() - getSzuletesiEv();
+    int years =(int)ChronoUnit.YEARS.between(maiDatum,localDate); */
+   LocalDate maiDatum = LocalDate.now();
+
+    //if (maiDatum.getMonth()>=this.getSzuletesiHonap())
+
+    boolean voltEszuletesnapja = maiDatum.getMonth().getValue() > this.getSzuletesiHonap()
+            || maiDatum.getMonth().getValue() == this.getSzuletesiHonap()
+            && maiDatum.getDayOfMonth() >= this.getSzuletesiNap();
+    int eletkor = maiDatum.getYear() - this.getSzuletesiEv();
+    if (!voltEszuletesnapja)
+    {
+    eletkor--;
+
+    }
+
+
+
+    return eletkor;
 
 
 
