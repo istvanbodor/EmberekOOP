@@ -1,5 +1,8 @@
 package hu.petrik.eberekoop;
 
+import java.time.LocalDate;
+
+
 public class Ember {
     private String nev;
     private String szulDatum;
@@ -30,10 +33,19 @@ public class Ember {
 
 
     }
+public int getEletkor()
+{
 
+    LocalDate maiDatum = LocalDate.now();
+    return maiDatum.getYear() - getSzuletesiEv();
+
+
+
+
+}
 
     @Override
     public String toString() {
-        return String.format("%-30s %10s %20s %d", this.nev, this.szulDatum, this.szulHely,this.getSzuletesiNap());
+        return String.format("%-30s %10s (%d) %20s %d", this.nev, this.szulDatum,this.getEletkor(), this.szulHely,this.getSzuletesiNap());
     }
 }
